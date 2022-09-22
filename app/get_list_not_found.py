@@ -7,8 +7,11 @@ import base64
 
 # logging.getLogger().setLevel(logging.INFO)
 
-# LP_API = os.getenv('LP_API', '')
-LP_API = "https://apibodegas.ondev.today"
+# LP_API = "https://apibodegas.ondev.today"
+# WF_RUN = "https://workflows-qa-mcbra3u5lq-uc.a.run.app"
+
+LP_API = os.getenv('LP_API', 'https://apibodegas.ondev.today')
+WF_RUN = os.getenv('WF_RUN', 'https://workflows-qa-mcbra3u5lq-uc.a.run.app')
 
 
 class GetDocumentsNotFound():
@@ -183,4 +186,5 @@ class GetDocumentsNotFound():
 
         return {
             "order_not_found": count,
-            "order": order_failled}
+            "order": order_failled
+            }
