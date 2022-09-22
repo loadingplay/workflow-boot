@@ -7,9 +7,11 @@ import base64
 
 # logging.getLogger().setLevel(logging.INFO)
 
-# LP_API = os.getenv('LP_API', '')
-LP_API = "https://apibodegas.ondev.today"
-WF_RUN = "https://workflows-qa-mcbra3u5lq-uc.a.run.app"
+# LP_API = "https://apibodegas.ondev.today"
+# WF_RUN = "https://workflows-qa-mcbra3u5lq-uc.a.run.app"
+
+LP_API = os.getenv('LP_API', 'https://apibodegas.ondev.today')
+WF_RUN = os.getenv('WF_RUN', 'https://workflows-qa-mcbra3u5lq-uc.a.run.app')
 
 
 class PostDocumentsNotFound():
@@ -159,7 +161,6 @@ class PostDocumentsNotFound():
         )
 
         print("ordenes sin boleta:", len(orders_without_invoice))
-
         orders_without_invoice.reverse()
         if not generate_orders_in_proccess:
             encoded_orders = self.encode_orders_to_send(
