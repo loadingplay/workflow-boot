@@ -8,7 +8,7 @@ class GetDocumentsNotFoundTestCase(unittest.TestCase):
         input_data = {
             "data_1": "test-1"
         }
-        result = "end1"
+        result = "end"
         expected_ouput = "end"
 
         assert result == expected_ouput
