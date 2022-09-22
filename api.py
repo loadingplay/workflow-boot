@@ -8,7 +8,7 @@ logging.getLogger().setLevel(logging.INFO)
 api = FastAPI()
 
 
-@api.get("/v1/get_document_failed")
+@api.post("/v1/get_document_failed")
 def get_list_document_not_found(data: dict):
     logging.info(f"Arrived data : {data}")
     json_data = GetDocumentsNotFound(data)
