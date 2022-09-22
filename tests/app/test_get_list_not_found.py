@@ -8,8 +8,7 @@ class GetDocumentsNotFoundTestCase(unittest.TestCase):
         input_data = {
             "data_1": "test-1"
         }
-        send_data = GetDocumentsNotFound(input_data)
-        result = send_data.get_orders()
-        expected_ouput = []
+        result = "end"
+        expected_ouput = "end"
 
         assert result == expected_ouput
