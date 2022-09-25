@@ -37,11 +37,9 @@ class GetDocumentsNotFound():
 
     def filter_orders_without_invoice(self, collected_orders):
         orders_without_invoice = []
-        #print(collected_orders)
         for order in collected_orders:
             if not order["url_document"]:
                 orders_without_invoice.append(order)
-
         return orders_without_invoice
 
     def encode_orders_to_send(self, token, workflow_id, orders_without_invoice):
@@ -67,10 +65,10 @@ class GetDocumentsNotFound():
         order_id = order_json["id"]
         resp = requests.get(
             f"{LP_API}/v1/order/{order_id}/detail",
-            headers={"Authorization": "Bearer " + token}
+            headers={"Authorization": f"Bearer {token}"}
         )
-
-        order_json["products"] = resp.json()["products"]
+        detail_product = resp.json()
+        order_json["products"] = detail_product.get("products", "")
 
         # TODO: fix this once API is fixed
         # get shipping
@@ -78,9 +76,8 @@ class GetDocumentsNotFound():
         resp = requests.get(
             f"{LP_API}/v1/contact/" +
             str(order_json["customer_id"]),
-            headers={"Authorization": "Bearer " + token}
+            headers={"Authorization": f"Bearer {token}"}
         )
-
         contacts = resp.json()["contact"]["success"]
         for c in contacts:
             if c["id"] == order_json["billing_id"]:
@@ -107,7 +104,7 @@ class GetDocumentsNotFound():
         resp = requests.get(
             str(LP_API) + "/v1/contact/" +
             str(order_json["customer_id"]),
-            headers={"Authorization": "Bearer " + token}
+            headers={"Authorization": f"Bearer {token}"}
         )
 
         contact = resp.json()["contact"]["success"][0]

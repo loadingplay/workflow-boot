@@ -66,7 +66,7 @@ class PostDocumentsNotFound():
         order_id = order_json["id"]
         resp = requests.get(
             f"{LP_API}/v1/order/{order_id}/detail",
-            headers={"Authorization": "Bearer " + token}
+            headers={"Authorization": f"Bearer {token}"}
         )
 
         order_json["products"] = resp.json()["products"]
@@ -119,7 +119,7 @@ class PostDocumentsNotFound():
         # allow to override some fields
         if override_customer_dni != "":
             order_json["customer"]["rut"] = override_customer_dni
-
+        print("3 : ", order_json)
         return order_json
 
     def send_run_workflow(self, encoded_action):
