@@ -1,5 +1,5 @@
 import unittest
-from tests.app.test_get_list_not_found import GetDocumentsNotFoundTestCase
+from tests.test_get_list_not_found import GetDocumentsNotFoundTestCase
 
 
 __all__ = [
