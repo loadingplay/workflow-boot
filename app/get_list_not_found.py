@@ -180,7 +180,7 @@ class GetDocumentsNotFound():
             if not order_collected["url_document"] and not extra_colection.get("bsale_nota_venta", ""):
                 count = count + 1
                 order_with_error = extra_colection.get(
-                    "name", "") + " - " + extra_colection.get(
+                    "name", "") + " - " + order_collected.get("cellar_id", "") + " - " + extra_colection.get(
                     "document_generation_error", "")
                 order_failled[order["id"]] = order_with_error
 
