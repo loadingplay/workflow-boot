@@ -173,15 +173,20 @@ class GetDocumentsNotFound():
             for order in encoded_orders:
                 print(self.send_run_workflow(order))
         # verificar que se genero la boleta
+        order_with_error = {
+            "id_pedido":"",
+            "cellar_id":"",
+            "document_generation_error":""
+        }
         count = 0
         for order in orders_without_invoice:
             order_collected = self.get_order(token, order["id"])["order"]
             extra_colection = json.loads(order_collected["extra_info"])
             if not order_collected["url_document"] and not extra_colection.get("bsale_nota_venta", ""):
                 count = count + 1
-                order_with_error = extra_colection.get(
-                    "name", "") + " - " + str(order_collected.get("cellar_id", "")) + " - " + extra_colection.get(
-                    "document_generation_error", "")
+                order_with_error["id_pedido"].append(extra_colection.get("name", ""))
+                order_with_error["cellar_id"].append(order_collected.get("cellar_id", ""))
+                order_with_error["document_generation_error"].append(extra_colection.get("document_generation_error", ""))
                 order_failled[order["id"]] = order_with_error
 
         return {
