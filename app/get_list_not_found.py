@@ -18,7 +18,7 @@ class GetDocumentsNotFound():
     def __init__(self, data) -> None:
         self.__data = data
 
-    def get_orders(self, token, date_min="", date_max="", page=1):
+    def get_orders(self, token, date_min="", date_max="", page=10):
         url = f"{LP_API}/v1/order"
 
         params = {
