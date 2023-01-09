@@ -24,7 +24,7 @@ class GetDocumentsNotFound():
         params = {
             "dateMin": date_min,
             "dateMax": date_max,
-            "items": 4000,
+            "items": 15000,
             "page": page
         }
 
