@@ -18,13 +18,14 @@ class GetDocumentsNotFound():
     def __init__(self, data) -> None:
         self.__data = data
 
-    def get_orders(self, token, date_min="", date_max=""):
+    def get_orders(self, token, date_min="", date_max="", page=1):
         url = f"{LP_API}/v1/order"
 
         params = {
             "dateMin": date_min,
             "dateMax": date_max,
-            "items": 4000
+            "items": 4000,
+            "page": page
         }
 
         headers = {
