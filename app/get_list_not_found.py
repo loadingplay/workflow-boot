@@ -7,8 +7,8 @@ import base64
 
 # logging.getLogger().setLevel(logging.INFO)
 
-# LP_API = "https://apibodegas.ondev.today"
-# WF_RUN = "https://workflows-qa-mcbra3u5lq-uc.a.run.app"
+# LP_API = "https://apibodegas.loadingplay.com"
+# WF_RUN = "https://workflows-mcbra3u5lq-uc.a.run.app"
 
 LP_API = os.getenv('LP_API', 'https://apibodegas.ondev.today')
 WF_RUN = os.getenv('WF_RUN', 'https://workflows-qa-mcbra3u5lq-uc.a.run.app')
@@ -18,13 +18,14 @@ class GetDocumentsNotFound():
     def __init__(self, data) -> None:
         self.__data = data
 
-    def get_orders(self, token, date_min="", date_max=""):
+    def get_orders(self, token, date_min="", date_max="", page=1):
         url = f"{LP_API}/v1/order"
 
         params = {
             "dateMin": date_min,
             "dateMax": date_max,
-            "items": 4000
+            "items": 15000,
+            "page": page
         }
 
         headers = {
@@ -149,9 +150,9 @@ class GetDocumentsNotFound():
         return response.json()
 
     def get_documents(self):
-        token = self.__data["token"]
-        date_min = self.__data["date_min"]
-        date_max = self.__data["date_max"]
+        token = "xcezpx7Fwt9QX63LqdopAVxePZ2vPyQBuGGmSNtf"
+        date_min = "2022-12-01"
+        date_max = "2022-12-31"
         order_failled = {}
 
         generate_orders_in_proccess = True
@@ -180,7 +181,7 @@ class GetDocumentsNotFound():
             if not order_collected["url_document"] and not extra_colection.get("bsale_nota_venta", ""):
                 count = count + 1
                 order_with_error = extra_colection.get(
-                    "name", "") + " - " + extra_colection.get(
+                    "name", "") + " - " + str(order_collected.get("cellar_id", "")) + " - " + extra_colection.get(
                     "document_generation_error", "")
                 order_failled[order["id"]] = order_with_error
 
